@@ -336,6 +336,40 @@
             
             #saveLocal, #resetBtn,[data-preview-hide], .preview-modal, button.remove, .remove, .btn, .ghost, .toolbar, .actions, #adminUsersBtn, #logoutBtn { display: none !important; }
             .photo-grid, .panel .photo-grid { grid-template-columns: repeat(4, 1fr) !important; }
+
+  /* ===== Work Log style for Notes/Issues/Concerns/Site Safety Observations (PRINT) =====
+     ต้องการให้พิมพ์รูป 4 รูปแบบ 2x2 เหมือน Work Log Photo */
+  #panelNotes .photo-grid,
+  #panelSafety .photo-grid,
+  #panelConcerns .photo-grid,
+  .panel .photo-grid{
+    grid-template-columns: 1fr 1fr !important; /* 2x2 */
+    gap: 10px !important;
+  }
+  /* แสดงเฉพาะ 4 รูปแรก */
+  #panelNotes .photo-item:nth-child(n+5),
+  #panelSafety .photo-item:nth-child(n+5),
+  #panelConcerns .photo-item:nth-child(n+5),
+  .panel .photo-item:nth-child(n+5){
+    display: none !important;
+  }
+  /* กำหนดขนาดรูปให้สม่ำเสมอ */
+  #panelNotes .photo-item img,
+  #panelSafety .photo-item img,
+  #panelConcerns .photo-item img,
+  .panel .photo-item img{
+    height: 180px !important;
+    object-fit: cover !important;
+  }
+  /* ไม่พิมพ์ปุ่มลบ/ปุ่มอัปโหลด และช่อง caption แบบ input */
+  #panelNotes button.remove, #panelSafety button.remove, #panelConcerns button.remove,
+  #panelNotes .photo-controls, #panelSafety .photo-controls, #panelConcerns .photo-controls{
+    display: none !important;
+  }
+  #panelNotes input.caption, #panelSafety input.caption, #panelConcerns input.caption{
+    display: none !important;
+  }
+
             
             /* ===== แก้ไขการปรื้นท์ตาราง Survey ===== */
             .survey-table { width: 100% !important; table-layout: auto !important; } /* เปลี่ยนเป็น auto ให้ตารางจัดการพื้นที่เอง */
