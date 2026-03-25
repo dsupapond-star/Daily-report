@@ -338,27 +338,22 @@
             .photo-grid, .panel .photo-grid { grid-template-columns: repeat(4, 1fr) !important; }
 
   /* ===== Work Log style for Notes/Issues/Concerns/Site Safety Observations (PRINT) =====
-     ต้องการให้พิมพ์รูป 4 รูปแบบ 2x2 เหมือน Work Log Photo */
+     ต้องการให้พิมพ์รูปแบบ Work Log: 4 รูป/แถว (4 picture/row) */
   #panelNotes .photo-grid,
   #panelSafety .photo-grid,
   #panelConcerns .photo-grid,
   .panel .photo-grid{
-    grid-template-columns: 1fr 1fr !important; /* 2x2 */
-    gap: 10px !important;
+    grid-template-columns: repeat(4, 1fr) !important; /* 4 per row */
+    gap: 8px !important;
   }
-  /* แสดงเฉพาะ 4 รูปแรก */
-  #panelNotes .photo-item:nth-child(n+5),
-  #panelSafety .photo-item:nth-child(n+5),
-  #panelConcerns .photo-item:nth-child(n+5),
-  .panel .photo-item:nth-child(n+5){
-    display: none !important;
-  }
+  /* แสดงทุกรูป (ไม่จำกัด 4 รูป) */
+
   /* กำหนดขนาดรูปให้สม่ำเสมอ */
   #panelNotes .photo-item img,
   #panelSafety .photo-item img,
   #panelConcerns .photo-item img,
   .panel .photo-item img{
-    height: 180px !important;
+    height: 140px !important;
     object-fit: cover !important;
   }
   /* ไม่พิมพ์ปุ่มลบ/ปุ่มอัปโหลด และช่อง caption แบบ input */
