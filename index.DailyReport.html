@@ -5,7 +5,22 @@
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>Daily Report Rev</title>
     <style>
-        :root {
+        
+
+
+/* ===== iPhone Safari: File input overlay (tap = real input tap) ===== */
+.file-overlay-wrap{ position: relative; display: inline-block; }
+.file-overlay-wrap .file-overlay-btn{ display: inline-block; }
+.file-overlay-wrap .file-overlay-input{
+  position: absolute; inset: 0; opacity: 0;
+  width: 100%; height: 100%; cursor: pointer;
+  -webkit-appearance: none; appearance: none;
+}
+
+/* Preview (PDF) modal: make the area outside the paper white (form stays the same) */
+.preview-modal { background: #fff !important; }
+
+:root {
             --bg: #f5f7fb;
             --card: #fff;
             --muted: #6b7280;
@@ -423,7 +438,16 @@
         .preview-mode #datePrint { display: inline-block !important; }
         .preview-mode .header-blue { flex-direction: row !important; justify-content: space-between !important; align-items: flex-start !important; }
         .preview-mode .header-right { width: auto !important; align-items: flex-end !important; }
-    </style>
+    
+
+/* PRINT: keep the rest of the blank paper pure white (does not change on-screen form) */
+@media print {
+  html, body { background: #fff !important; }
+  .wrap, .preview-mode { background: #fff !important; }
+}
+
+
+</style>
 </head>
 <body>
 <div class="wrap">
@@ -530,8 +554,10 @@
                             <label class="muted">เลือกช่างสำหรับรูป</label>
                             <select id="photoWorkerSelect" aria-label="เลือกช่างสำหรับรูป"></select>
                             
-                            <input id="photoInput" type="file" accept="image/*" multiple style="display:none;">
-                            <label for="photoInput" id="uploadPhotosBtn" class="btn" style="cursor:pointer; display:inline-block; box-sizing:border-box; line-height:normal; margin:0;">อัปโหลดรูป</label>
+                            <div class="file-overlay-wrap" style="margin:0;">
+  <span id="uploadPhotosBtn" class="btn file-overlay-btn" style="cursor:pointer; display:inline-block; box-sizing:border-box; line-height:normal; margin:0;">อัปโหลดรูป</span>
+  <input id="photoInput" class="file-overlay-input" type="file" accept="image/*" multiple capture="environment" aria-label="อัปโหลดรูป Work log Photos">
+</div>
                             
                             <button id="clearPhotosBtn" class="btn ghost">ล้างรูปทั้งหมด</button>
                         </div>
@@ -547,8 +573,10 @@
                                 <div class="panel-body">
                                     <textarea id="notesIssues" placeholder=" "></textarea>
                                     <div class="photo-controls">
-                                        <input id="notesPhotoInput" type="file" accept="image/*" multiple style="display:none;" data-preview-hide>
-                                        <label for="notesPhotoInput" id="notesAddPhoto" class="btn ghost" style="cursor:pointer; display:inline-block; margin:0;" data-preview-hide>Add photos</label>
+                                        <div class="file-overlay-wrap" data-preview-hide>
+  <span id="notesAddPhoto" class="btn ghost file-overlay-btn" style="cursor:pointer; display:inline-block; margin:0;" data-preview-hide>Add photos</span>
+  <input id="notesPhotoInput" class="file-overlay-input" type="file" accept="image/*" multiple capture="environment" data-preview-hide aria-label="Add photos (Notes)">
+</div>
                                         <button id="notesClearPhoto" class="btn ghost" data-preview-hide>Clear photos</button>
                                     </div>
                                     <div class="panel photo-grid" id="notesPhotoGrid" aria-live="polite"></div>
@@ -562,8 +590,10 @@
                                 <div class="panel-body">
                                     <textarea id="safetyObservations" placeholder=" "></textarea>
                                     <div class="photo-controls">
-                                        <input id="safetyPhotoInput" type="file" accept="image/*" multiple style="display:none;" data-preview-hide>
-                                        <label for="safetyPhotoInput" id="safetyAddPhoto" class="btn ghost" style="cursor:pointer; display:inline-block; margin:0;" data-preview-hide>Add photos</label>
+                                        <div class="file-overlay-wrap" data-preview-hide>
+  <span id="safetyAddPhoto" class="btn ghost file-overlay-btn" style="cursor:pointer; display:inline-block; margin:0;" data-preview-hide>Add photos</span>
+  <input id="safetyPhotoInput" class="file-overlay-input" type="file" accept="image/*" multiple capture="environment" data-preview-hide aria-label="Add photos (Site Safety)">
+</div>
                                         <button id="safetyClearPhoto" class="btn ghost" data-preview-hide>Clear photos</button>
                                     </div>
                                     <div class="panel photo-grid" id="safetyPhotoGrid" aria-live="polite"></div>
@@ -579,8 +609,10 @@
                             <div class="panel-body">
                                 <textarea id="concernsField" placeholder=" "></textarea>
                                 <div class="photo-controls">
-                                    <input id="concernsPhotoInput" type="file" accept="image/*" multiple style="display:none;" data-preview-hide>
-                                    <label for="concernsPhotoInput" id="concernsAddPhoto" class="btn ghost" style="cursor:pointer; display:inline-block; margin:0;" data-preview-hide>Add photos</label>
+                                    <div class="file-overlay-wrap" data-preview-hide>
+  <span id="concernsAddPhoto" class="btn ghost file-overlay-btn" style="cursor:pointer; display:inline-block; margin:0;" data-preview-hide>Add photos</span>
+  <input id="concernsPhotoInput" class="file-overlay-input" type="file" accept="image/*" multiple capture="environment" data-preview-hide aria-label="Add photos (Concerns)">
+</div>
                                     <button id="concernsClearPhoto" class="btn ghost" data-preview-hide>Clear photos</button>
                                 </div>
                                 <div class="panel photo-grid" id="concernsPhotoGrid" aria-live="polite"></div>
